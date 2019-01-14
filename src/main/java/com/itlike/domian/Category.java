@@ -8,4 +8,13 @@ public class Category {
     private Integer cid;
     private String cname;
     private Integer parentid;
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "cid=" + cid +
+                ", cname='" + cname + '\'' +
+                ", parentid=" + parentid +
+                '}';
+    }
 }

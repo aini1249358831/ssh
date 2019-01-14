@@ -15,7 +15,7 @@
 
     <!--导入hibernate相关配置-->
     <import resource="hibernateApplication.xml"/>
-
+      <!--配置登陆的action-->
     <bean id="loginAction" class="com.itlike.web.LoginAction" scope="prototype">
         <property name="loginService" ref="loginService"/>
     </bean>
@@ -26,6 +26,17 @@
 
     <bean id="userDao" class="com.itlike.dao.impl.UserDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <!--配置分类的action-->
+    <bean id="categoryAction" class="com.itlike.web.CategoryAction">
+        <property name="categoryService" ref="categoryService"></property>
+
+    </bean>
+    <bean id="categoryService" class="com.itlike.service.impl.CategoryServiceImpl">
+        <property name="categoryDao" ref="categoryDao"/>
+    </bean>
+    <bean id="categoryDao" class="com.itlike.dao.impl.CategoryDaoImpl">
+      <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
 </beans>

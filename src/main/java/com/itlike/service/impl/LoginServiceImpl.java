@@ -3,7 +3,9 @@ package com.itlike.service.impl;
 import com.itlike.dao.UserDao;
 import com.itlike.domian.User;
 import com.itlike.service.LoginService;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class LoginServiceImpl implements LoginService {
     private UserDao userDao;
 
