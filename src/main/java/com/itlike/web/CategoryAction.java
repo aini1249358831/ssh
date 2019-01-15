@@ -1,13 +1,11 @@
 package com.itlike.web;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.itlike.domian.Category;
 import com.itlike.service.CategoryService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
-import jdk.nashorn.internal.scripts.JS;
 import org.apache.struts2.ServletActionContext;
 
 import java.io.IOException;

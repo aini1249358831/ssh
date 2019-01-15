@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%
     String ctx = request.getContextPath();
-    pageContext.setAttribute("ctx", ctx);
+    request.setAttribute("ctx", ctx);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +41,7 @@
             <div class="am-input-group am-input-group-sm">
                 <input type="text" class="am-form-field" id="input_search">
                 <span class="am-input-group-btn">
-                    <button class="am-btn am-btn-default" type="button" id="input_search_btn">搜索</button>
+                    <button class="am-btn am-btn-default input_search_btn" type="button"  id="input_search_btn">搜索</button>
                 </span>
             </div>
         </div>
@@ -52,24 +53,22 @@
         <li>序号</li>
         <li>标题</li>
         <li>学科</li>
-        <li>技能</li>
         <li>编辑</li>
         <li>删除</li>
     </ul>
 
-    <s:iterator value="list">
+    <s:iterator value="list" var="article">
         <ul class="list_goods_ul">
-            <li>aaa</li>
-            <li>bbb</li>
-            <li>ccc</li>
-            <li>ddd</li>
+            <li><s:property value="#article.article_id" /></li>
+            <li><s:property value="#article.article_title" /></li>
+            <li><s:property value="#article.category.cname" /></li>
             <li>
-                <a href="#">
+                <a href="${ctx}/article_edit.action?article_id=<s:property value="#article.article_id" />">
                 <img class="img_icon" src="${ctx }/images/edit_icon.png" alt=""></a>
             </li>
             <li>
-                <a href="#">
-                    <img class="img_icon" src="${ctx }/images/delete_icon.png" alt="">
+                <a href="${pageContext.request.contextPath}/article_delete.action?article_id=<s:property value="#article.article_id" />">
+                    <img class="img_icon" src="${ctx}/images/delete_icon.png" alt="">
                 </a>
             </li>
         </ul>
@@ -81,22 +80,35 @@
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/paging.js"></script>
 <script>
-    
-    //分页
-    $("#page").paging({
-        pageNo:1,
-        totalPage: 5,
-        totalSize: 3,
-        callback: function(num) {
-          /*  $(window).attr('location','/article_list.action?currPage='+num);*/
-            alert(num);
-        }
+    $(function () {
+        //分页
+        $("#page").paging({
+            pageNo:<s:property value="currentPage" />,
+            totalPage: <s:property value="totalPage" />,
+            totalSize: <s:property value="totalCount" />,
+            callback: function(num) {
+                $(window).attr('location','${pageContext.request.contextPath}/article_pageList.action?currentPage='+num);
+            }
+        });
+
+        $("#add").click(function () {
+            $(window).attr('location','${ctx }/mgr_add_article.jsp');
+        });
+
+        $(".input_search_btn").click(function () {
+                var  content = $("#input_search").val();
+                alert(content);
+                $(window).attr('location','${pageContext.request.contextPath}/article_pageList.action?content='+content);
+
+            }
+
+        );
+
+
+
     });
 
-    $("#add").click(function () {
-        alert("aaa");
-        $(window).attr('location','${ctx }/mgr_add_article.jsp');
-    });
+
 </script>
 
 </body>

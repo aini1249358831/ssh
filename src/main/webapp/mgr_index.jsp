@@ -23,7 +23,7 @@ scrolling：是否有滚动条
         <%--左面--%>
         <frame src="mgr_left.jsp" name="leftFrame"  scrolling="NO">
             <%--右面--%>
-        <frame src="${pageContext.request.contextPath}/article_list.action" name="mainFrame" >
+        <frame src="${pageContext.request.contextPath}/article_pageList.action" name="mainFrame" >
     </frameset>
 </frameset>
 

@@ -3,7 +3,7 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.itlike.domian.Article" table="category" >
+    <class name="com.itlike.domian.Article" table="article" >
         <!--建立类属性哪一个是主键  还要跟数据库当中主键进行对象-->
         <id name="article_id" column="article_id" >
              <generator class="native" />
@@ -13,7 +13,10 @@
         <property name="article_time" column="article_time"/>
         <property name="article_content" column="article_content"/>
         <property name="article_pic" column="article_pic"/>
-        <many-to-one name="category" class="com.itlike.domian.Category" column="article_cid" />
+        <property name="article_desc" column="article_desc"/>
+        <!--多对一的关系-->
+        <!--配置非延迟加载-->
+        <many-to-one lazy="false" name="category" class="com.itlike.domian.Category" column="article_cid" />
     </class>
 </hibernate-mapping>
 
